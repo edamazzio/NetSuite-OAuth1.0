@@ -21,13 +21,13 @@ const getParameters = {
 netsuiteUrl.search = new URLSearchParams(getParameters).toString();
 
 const realm = '6510521_SB1';
-const consumerSecret = 'af07b755aa687e96af7139d55a4bc3cbafe42b37a9f91267a87a626c3ab7b153';
-const tokenSecret = '78ef33d719ca17bfbad26fd7baca5f84476bbcf837e7f855ea713b66d65b810f';
+const consumerSecret = 'hidden';
+const tokenSecret = 'hidden';
 
 // Build the object with all the OAuth parameters AND the url params as well
 const parameters = {
-    oauth_consumer_key: '0d4d05a74f3c6b13038b1e978eb52a0e80aa71d09a423a8c96758e7131fcfd77',
-    oauth_token: '8fef4f7cb7cc3710066f447c43a929ffb79ad4462f257911384e5d639650519a',
+    oauth_consumer_key: 'hidden',
+    oauth_token: 'hidden',
     oauth_nonce: uuid.v1().split('-').join(''), // random string. In this example only lowercase letters and numbers
     oauth_timestamp: moment().utcOffset(-6).unix().toString(),
     oauth_signature_method: 'HMAC-SHA256',
@@ -55,7 +55,7 @@ for (let param in orderedParameters) {
         encodedParameters += `&${encodedKey}=${encodedValue}`;
     }
 }
-// URI-encode the base url without the url parameters(https://6510521-sb1.restlets.api.netsuite.com/app/site/hosting/restlet.nl)
+// URI-encode the base url without the url parameters(https://111111-sb1.restlets.api.netsuite.com/app/site/hosting/restlet.nl)
 const encodedUrl = encodeURIComponent(netsuiteUrl.href.split('?')[0]);
 
 // URI-encode the parameters concatenated previously
