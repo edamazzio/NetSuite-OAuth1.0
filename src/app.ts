@@ -10,24 +10,27 @@ import * as crypto from 'crypto';
 import * as uuid from 'uuid';
 
 const httpMethod = 'GET';
-const netsuiteUrl = new URL('https://6510521-sb1.restlets.api.netsuite.com/app/site/hosting/restlet.nl');
+// Url without any params
+const netsuiteUrl = new URL('https://#account-id#.restlets.api.netsuite.com/app/site/hosting/restlet.nl');
 
 const getParameters = {
-    'script':'573',
+    'script':'1465',
     'deploy':'1',
-    'method':'activityCodes'
 }
 
 netsuiteUrl.search = new URLSearchParams(getParameters).toString();
 
-const realm = '6510521_SB1';
-const consumerSecret = 'hidden';
-const tokenSecret = 'hidden';
+
+const realm = ''; // NetSuite account
+const consumerSecret = '';
+const tokenSecret = '';
+const consumerKey = '';
+const token = '';
 
 // Build the object with all the OAuth parameters AND the url params as well
 const parameters = {
-    oauth_consumer_key: 'hidden',
-    oauth_token: 'hidden',
+    oauth_consumer_key: consumerKey,
+    oauth_token: token,
     oauth_nonce: uuid.v1().split('-').join(''), // random string. In this example only lowercase letters and numbers
     oauth_timestamp: moment().utcOffset(-6).unix().toString(),
     oauth_signature_method: 'HMAC-SHA256',
@@ -37,9 +40,11 @@ const parameters = {
 
 // Create a new object with the parameters keys sorted
 let orderedParameters = {};
-Object.keys(parameters).sort().forEach(function(key) {
-    orderedParameters[key] = parameters[key];
-});
+
+for (const [key, value] of Object.entries(parameters).sort()) {
+    orderedParameters[key] = value
+}
+
 
 // Escape all the values and URI-encode all the keys and concatenate them on a string
 // Result: keyA=valueA&keyB=valueB
@@ -48,14 +53,12 @@ for (let param in orderedParameters) {
 
     let encodedValue = escape(orderedParameters[param]);
     let encodedKey = encodeURIComponent(param);
-    if(encodedParameters === ''){
-        encodedParameters += `${encodedKey}=${encodedValue}`;
-    }
-    else{
-        encodedParameters += `&${encodedKey}=${encodedValue}`;
-    }
+    encodedParameters += `${encodedKey}=${encodedValue}&`;
 }
-// URI-encode the base url without the url parameters(https://111111-sb1.restlets.api.netsuite.com/app/site/hosting/restlet.nl)
+// remove last &
+encodedParameters = encodedParameters.slice(0, -1);
+
+// URI-encode the base url without the url parameters(https://.restlets.api.netsuite.com/app/site/hosting/restlet.nl)
 const encodedUrl = encodeURIComponent(netsuiteUrl.href.split('?')[0]);
 
 // URI-encode the parameters concatenated previously
