@@ -4,10 +4,7 @@
  * @contact edamazzio@crowdintelligence.net
  */
 
-import moment from 'moment';
-import fetch from 'node-fetch';
-import * as crypto from 'crypto';
-import * as uuid from 'uuid';
+
 
 const httpMethod = 'GET';
 // Url without any params
@@ -20,7 +17,6 @@ const getParameters = {
 
 netsuiteUrl.search = new URLSearchParams(getParameters).toString();
 
-
 const realm = ''; // NetSuite account
 const consumerSecret = '';
 const tokenSecret = '';
@@ -32,7 +28,7 @@ const parameters = {
     oauth_consumer_key: consumerKey,
     oauth_token: token,
     oauth_nonce: uuid.v1().split('-').join(''), // random string. In this example only lowercase letters and numbers
-    oauth_timestamp: moment().utcOffset(-6).unix().toString(),
+    oauth_timestamp: Math.floor(new Date().getTime() / 1000).toString(),
     oauth_signature_method: 'HMAC-SHA256',
     oauth_version: '1.0',
     ...getParameters
@@ -99,3 +95,12 @@ sendGetRequest(netsuiteUrl.toString())
         const textBody = await data.text().then(body => body);
         console.log(`status: ${data.status}. Body: ${textBody}`);
     });
+
+
+function getRandomString(maxLength?: number){
+    var chars = 'abcdefghijklmnopqrstuvwxyz0123456789';
+    maxLength = maxLength ? maxLength : chars.length;
+    return chars.split("").reduce((res, curr) => {
+        return chars.charAt(Number((Math.random()*100%chars.length).toFixed(0)))
+    }).slice(0, maxLength);
+}
