@@ -77,8 +77,8 @@ echo "Signature: \n{$oauth_signature}\n\n";
 
 $curl_request = curl_init();
 $headers = array(
-'Content-Type: application/json',
-'Authorization: {$authorization}',
+"Content-Type: application/json",
+"Authorization: {$authorization}",
 );
 
 $request_url = $netsuite_url."?".http_build_query($get_parameters);
