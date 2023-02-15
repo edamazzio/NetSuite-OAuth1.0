@@ -8,8 +8,6 @@ This repo has examples in multiple languages of how to build a valid OAuth 1.0 h
 - Fill in the netsuiteUrl to your specific account id
 - Fill in the realm and tokens at the beginning of the file
 
-## Node: 
-
 ## To run this demo:
 ### Node
 
