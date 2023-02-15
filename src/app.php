@@ -35,7 +35,6 @@ $parameters = array_merge([
 );
 
 $sorted_paramters = sort_array($parameters);
-print_r($parameters);
 
 $encoded_parameters = "";
 
@@ -82,7 +81,7 @@ $headers = array(
 );
 
 $request_url = $netsuite_url."?".http_build_query($get_parameters);
-echo $request_url;
+echo "Sending request to {$request_url}...\n\n";
 
 curl_setopt($curl_request, CURLOPT_URL, $request_url);
 curl_setopt($curl_request, CURLOPT_HTTPHEADER, $headers);
@@ -91,6 +90,6 @@ curl_setopt($curl_request, CURLOPT_CUSTOMREQUEST, "GET");
 
 $result = curl_exec($curl_request);
 
-echo $result;
+echo "Response body:\n{$result}";
 
 ?>
