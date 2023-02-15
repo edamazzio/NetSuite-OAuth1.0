@@ -1,5 +1,7 @@
 # NetSuite-OAuth1.0
 
+This repo has examples in multiple languages of how to build a valid OAuth 1.0 header to connect to a NetSuite RESTlet. 
+
 
 ### Auth data fill in
 
@@ -8,15 +10,18 @@
 
 ## Node: 
 
-Install dependencies and set-up this demo:
+## To run this demo:
+### Node
+
+Install dependencies:
 
     $ npm install
-
-## To run this demo:
+    
+Then run it with
 
     $ npm run start
 
 
-## PHP
+### PHP
 
     $ php src/app.php 
