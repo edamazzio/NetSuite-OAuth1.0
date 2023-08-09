@@ -1,7 +1,7 @@
 /**
  * NetSuite OAuth connection example.
  * @developer Esteban Damazio
- * @contact edamazzio@crowdintelligence.net
+ * @contact edamazzio@gmail.com
  */
 
 
